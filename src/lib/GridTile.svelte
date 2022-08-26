@@ -13,10 +13,6 @@
 		const temp = [...$CartItemsStore, product]
 		$CartItemsStore = Array.from(new Set(temp))
 		product.quantity += 1
-		/* CartItemsStore.update((currentData) => {
-			console.log($CartItemsStore)
-			return [product, ...currentData]
-		}) */
 	}
 
 	function closeModal() {

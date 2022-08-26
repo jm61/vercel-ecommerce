@@ -21,10 +21,20 @@
 		}
 	}
 
-	function addItemToCart(i) {
+	/* function addItemToCart(i) {
 		CartItemsStore.update((currentData) => {
+			const temp = [...$CartItemsStore, $newItems[i]]
+			console.log(temp)
+			$CartItemsStore = Array.from(new Set(temp))
 			return [$newItems[i], ...currentData]
 		})
+	} */
+
+	function addItemToCart(i) {
+		const temp = [...$CartItemsStore, $newItems[i]]
+		$CartItemsStore = Array.from(new Set(temp))
+		console.log($CartItemsStore)
+		$newItems[i].quantity += 1
 	}
 </script>
 
