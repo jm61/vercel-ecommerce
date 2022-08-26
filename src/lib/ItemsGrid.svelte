@@ -1,5 +1,5 @@
 <script>
-	import { getContext } from 'svelte'
+	//import { getContext } from 'svelte'
 	import { newItems } from '$lib/store'
 	//let items = getContext('newItemsContext')
 </script>

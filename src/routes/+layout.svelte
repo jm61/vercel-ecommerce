@@ -1,9 +1,11 @@
 <script>
 	import '../app.postcss'
 	import ShoppingCart from '$lib/ShoppingCart.svelte'
+	import Modal from '$lib/Modal.svelte'
 	import { CartItemsStore } from '$lib/store'
 
 	let showCart = false
+	let showModal = true
 	let cartCount = 0
 
 	$: cartItems = $CartItemsStore
@@ -20,6 +22,29 @@
 </script>
 
 <div>
+	{#if showModal}
+		<Modal
+			on:click={() => {
+				showModal = false
+			}}
+		>
+			<span slot="header">
+				<em class="text-xl text-white">{new Date().toLocaleDateString('fr')}</em>
+			</span>
+			<span slot="body">
+				<p class="text-center mb-6">The whole store is 20% off!</p>
+			</span>
+			<span slot="button" let:hover={hovering}>
+				<button
+					on:click={() => {
+						showModal = false
+					}}
+					class="bg-pink-500 text-white uppercase font-medium p-2 rounded-md"
+					>{hovering ? 'Close' : 'Awesome!'}</button
+				>
+			</span>
+		</Modal>
+	{/if}
 	<div>
 		<nav class="flex items-center border-b border-zinc-700 p-4 lg:px-6">
 			<div class="flex w-full items-center justify-between">
@@ -33,6 +58,9 @@
 				</div>
 				<h4 class="px-2 rounded-md font-bold hover:shadow-xl hover:shadow-blue-500">
 					<a href="https://vercel.com/docs/beginner-sveltekit">Svelte Tutorial Vercel</a>
+				</h4>
+				<h4 class="px-2 rounded-md font-bold hover:shadow-xl hover:shadow-blue-500">
+					<a href="/test">Test</a>
 				</h4>
 				<button
 					on:click={() => {

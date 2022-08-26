@@ -1,14 +1,16 @@
 <script>
 	import { CartItemsStore, newItems } from '$lib/store'
+	/** @type {Array.<string>}*/
 	export let cartItems
 
 	CartItemsStore.subscribe((data) => {
+		//console.log($CartItemsStore)
 		cartItems = data
+		//console.log(cartItems)
 	})
 
 	function addOne(i) {
 		cartItems[i].quantity = cartItems[i].quantity + 1
-		console.log(cartItems[i].quantity)
 	}
 
 	function removeOne(i) {
@@ -32,26 +34,30 @@
 			<div class="text-2xl font-medium">My Cart</div>
 			<button on:click class="text-sm uppercase opacity-80 hover:opacity-100">close</button>
 		</div>
-		{#each $newItems as newItem, i (newItem.title)}
-			<div class="mb-4 px-6 py-1 flex items-center justify-between bg-orange-500 rounded-md">
-				<div class="relative flex items-center">
-					<img src={newItem.src} class="h-10 bg-white mr-2" alt="cup" />
-					<p class="uppercase font-medium">{newItem.title}</p>
-					<div
-						class="absolute top-0 left-0 -ml-4 bg-white text-black font-medium rounded-full px-1 py-px flex items-center justify-center"
-						style="font-size: 10px;"
-					>
-						NEW!
+		<details>
+			<summary>New Items</summary>
+			{#each $newItems as newItem, i (newItem.title)}
+				<div class="mb-4 px-6 py-1 flex items-center justify-between bg-orange-500 rounded-md">
+					<div class="relative flex items-center">
+						<img src={newItem.src} class="h-10 bg-white mr-2" alt="cup" />
+						<p class="uppercase font-medium">{newItem.title}</p>
+						<div
+							class="absolute top-0 left-0 -ml-4 bg-white text-black font-medium rounded-full px-1 py-px flex items-center justify-center"
+							style="font-size: 10px;"
+						>
+							NEW!
+						</div>
 					</div>
+					<button
+						on:click={() => addItemToCart(i)}
+						class="bg-white/90 p-1 text-black uppercase font-medium text-xs"
+					>
+						Add to Cart
+					</button>
 				</div>
-				<button
-					on:click={() => addItemToCart(i)}
-					class="bg-white/90 p-1 text-black uppercase font-medium text-xs"
-				>
-					Add to Cart
-				</button>
-			</div>
-		{/each}
+			{/each}
+		</details>
+
 		{#if cartItems.length === 0}
 			<div class="mt-20 w-full flex flex-col items-center justify-center overflow-hidden">
 				<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center" />
@@ -59,7 +65,7 @@
 			</div>
 		{/if}
 		<div class="overflow-y-auto" style="height: 60%;">
-			{#each cartItems as item, i (item.title)}
+			{#each cartItems as item, i}
 				<div>
 					<div class="w-full flex mb-2">
 						<img class="bg-white flex-none w-20" src={item.src} alt="item" />
