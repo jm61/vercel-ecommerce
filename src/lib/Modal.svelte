@@ -1,5 +1,6 @@
 <script>
 	let hover = false
+	export let bg = 'bg-gray-300'
 </script>
 
 <div
@@ -7,7 +8,7 @@
 	class="bg-black/60 p-8 flex justify-center items-start z-50 w-full h-screen absolute inset-0"
 >
 	<div
-		class="p-8 bg-white w-full md:w-1/2 rounded-md flex flex-col items-center justify-center text-black "
+		class={`p-8 ${bg} w-full md:w-1/2 rounded-md flex flex-col items-center justify-center text-black`}
 	>
 		{#if $$slots.header}
 			<div class="bg-indigo-500 mb-6 p-3 w-full text-center rounded-md">

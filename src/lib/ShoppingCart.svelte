@@ -1,12 +1,12 @@
 <script>
 	import { CartItemsStore, newItems } from '$lib/store'
+	import { fade } from 'svelte/transition'
+	import { flip } from 'svelte/animate'
 	/** @type {Array.<string>}*/
 	export let cartItems
 
 	CartItemsStore.subscribe((data) => {
-		//console.log($CartItemsStore)
 		cartItems = data
-		//console.log(cartItems)
 	})
 
 	function addOne(i) {
@@ -14,6 +14,7 @@
 	}
 
 	function removeOne(i) {
+		shuffle(i)
 		cartItems[i].quantity = cartItems[i].quantity - 1
 		if (cartItems[i].quantity <= 0) {
 			cartItems[i].quantity = 1
@@ -21,24 +22,23 @@
 		}
 	}
 
-	/* function addItemToCart(i) {
-		CartItemsStore.update((currentData) => {
-			const temp = [...$CartItemsStore, $newItems[i]]
-			console.log(temp)
-			$CartItemsStore = Array.from(new Set(temp))
-			return [$newItems[i], ...currentData]
-		})
-	} */
+	const shuffle = (i) => {
+		var element = cartItems[i]
+		cartItems.splice(i, 1)
+		cartItems.splice(0, 0, element)
+	}
 
 	function addItemToCart(i) {
 		const temp = [...$CartItemsStore, $newItems[i]]
 		$CartItemsStore = Array.from(new Set(temp))
-		console.log($CartItemsStore)
 		$newItems[i].quantity += 1
 	}
 </script>
 
-<div class="z-50 max-h-screen overflow-hidden flex justify-end w-full absolute inset-0 bg-black/50">
+<div
+	transition:fade
+	class="z-50 max-h-screen overflow-hidden flex justify-end w-full absolute inset-0 bg-black/50"
+>
 	<div class="lg:w-1/3 md:w-1/2 w-full bg-black z-50 p-6 text-white">
 		<div class="mb-6 w-full flex items-center justify-between">
 			<div class="text-2xl font-medium">My Cart</div>
@@ -75,8 +75,8 @@
 			</div>
 		{/if}
 		<div class="overflow-y-auto" style="height: 60%;">
-			{#each cartItems as item, i}
-				<div>
+			{#each cartItems as item, i (item.title)}
+				<div animate:flip>
 					<div class="w-full flex mb-2">
 						<img class="bg-white flex-none w-20" src={item.src} alt="item" />
 						<div class="flex flex-col justify-between ml-4 w-full">

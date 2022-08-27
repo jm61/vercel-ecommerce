@@ -7,6 +7,7 @@
 		quantity: 1
 	}
 	let showModal = false
+	let bg = 'bg-green-300'
 	import { CartItemsStore } from '$lib/store'
 
 	function addToCart() {
@@ -26,6 +27,7 @@
 <div class="h-[30vh] w-1/2 bg-indigo-600 overflow-hidden mb-6 rounded-lg shadow ml-6">
 	{#if showModal}
 		<Modal
+			{bg}
 			on:click={() => {
 				showModal = false
 			}}

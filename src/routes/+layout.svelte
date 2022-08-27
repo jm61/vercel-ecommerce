@@ -59,9 +59,6 @@
 				<h4 class="px-2 rounded-md font-bold hover:shadow-xl hover:shadow-blue-500">
 					<a href="https://vercel.com/docs/beginner-sveltekit">Svelte Tutorial Vercel</a>
 				</h4>
-				<h4 class="px-2 rounded-md font-bold hover:shadow-xl hover:shadow-blue-500">
-					<a href="/test">Test</a>
-				</h4>
 				<button
 					on:click={() => {
 						showCart = true
