@@ -1,5 +1,6 @@
 <script>
 	import Modal from '$lib/Modal.svelte'
+	import { blur } from 'svelte/transition'
 	export let product = {
 		title: 'No product provided',
 		src: 'https://img.icons8.com/ios/500/no-image.png',
@@ -32,7 +33,7 @@
 				showModal = false
 			}}
 		>
-			<span slot="body">
+			<span in:blur slot="body">
 				<p class="text-center mb-6">
 					Item added to Cart <span><small>quantity: {product.quantity}</small></span>
 				</p>

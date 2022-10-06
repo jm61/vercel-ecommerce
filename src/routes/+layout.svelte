@@ -3,9 +3,11 @@
 	import ShoppingCart from '$lib/ShoppingCart.svelte'
 	import Modal from '$lib/Modal.svelte'
 	import { CartItemsStore } from '$lib/store'
+	import { page } from '$app/stores'
 
 	let showCart = false
 	let showModal = true
+	if ($page.status === 404) showModal = false
 	let cartCount = 0
 
 	$: cartItems = $CartItemsStore
